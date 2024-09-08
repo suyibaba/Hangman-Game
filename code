@@ -1,0 +1,34 @@
+import random
+
+display = []
+word_list = ["manchester", "arsenal", "liverpool", "food", "yogurt", "anniversary"]
+selected_choice = random.choice(word_list)
+word_length = len(selected_choice)
+lives = 5
+
+for _ in range(word_length):
+    display += "_"
+print(display)
+end_of_game = False
+
+while not end_of_game:
+    guessed = input("guess a random letter \n").lower()
+    letter: str
+    for position in range(len(selected_choice)):
+        letter = selected_choice[position]
+        # print(f"current position:{position}\n current letter :{letter} \n guessed letter:{guessed}")
+        if letter == guessed:
+            display[position] = letter
+
+    if guessed not in selected_choice:
+        print(f"you guessed {guessed}, that's not in the word. You lose a life")
+        lives -= 1
+        if lives == 0:
+            end_of_game = True
+            print("You lose")
+
+    print(display)
+
+    if "_" not in display:
+        end_of_game = True
+        print("you win")
